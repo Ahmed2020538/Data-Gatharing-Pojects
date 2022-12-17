@@ -1,0 +1,75 @@
+def Get_FX_Factory_data(url) :
+    with open("FX_Factory_Data.csv" , "w+") as f :
+        writer = csv.DictWriter( f , fieldnames=["position" , "Team_Name" ,"Points"])
+        writer.writeheader()
+        res = R.get(url)
+        soup = B(res.text , "html.parser")
+        position = soup.find_all("td" , attrs = {"class" : "pos"})
+        Name = soup.find_all("td" , attrs = {"class" : "team"})
+        point = soup.find_all("td" , attrs = {"class" : "points"})
+        for pos in position :
+            team_posision = pos.find("span" , attrs = {"class" :"value"}).get_text()
+            print(f"The Team Posision :: {team_posision}\n==============")
+            
+        for N in Name :
+            team_name = N.get_text().strip()
+            #team_points = pt.find("td" , attrs = {"class" :"points"}).get_text()
+            print(f"The Team Name :: {team_name}\n==============")
+            
+        for pt in point :
+            team_points = pt.get_text()
+            #team_points = pt.find("td" , attrs = {"class" :"points"}).get_text()
+            print(f"The Team points :: {team_points}\n==============")
+
+
+Get_FX_Factory_data("https://www.premierleague.com/")
+
+//===================================================================================================
+//===================================================================================================
+//===================================================================================================
+//===================================================================================================
+//===================================================================================================
+//===================================================================================================
+
+
+
+
+def AAGet_FX_Factory_data(url) :
+    with open("FX_Factory_Data.csv" , "w+") as f :
+        writer = csv.DictWriter( f , fieldnames=["position" , "Team_Name" ,"Points"])
+        writer.writeheader()
+        res = R.get(url)
+        soup = B(res.text , "html.parser")
+        position = soup.find_all("td" , attrs = {"class" : "pos button-tooltip"})
+        Name = soup.find_all("td" , attrs = {"class" : "team"})
+        point = soup.find_all("td" , attrs = {"class" : "points"})
+        Next_Matcch = soup.find_all("span" , attrs = {"class" : "nextMatch"})
+        for pos in position :
+            team_posision = pos.find("span" , attrs = {"class" :"value"}).get_text()
+            print(f"The Team Posision :: {team_posision}\n==============")
+            
+        for N in Name :
+            team_name = N.find("span" ,  attrs = {"class" : "long"}).get_text().strip()
+            #team_points = pt.find("td" , attrs = {"class" :"points"}).get_text()
+            print(f"The Team Name :: {team_name}\n==============")
+            
+        for pt in point :
+            team_points = pt.get_text()
+            #team_points = pt.find("td" , attrs = {"class" :"points"}).get_text() visuallyHidden
+            print(f"The Team points :: {team_points}\n==============")
+        for Next in Next_Matcch :
+            team_Next = Next.find("span" , attrs = {"class" : "visuallyHidden"}).get_text()
+            #team_points = pt.find("td" , attrs = {"class" :"points"}).get_text() visuallyHidden
+            print(f"The Team Next :: {team_Next}\n==============")
+
+
+AAGet_FX_Factory_data("https://www.premierleague.com/tables")
+
+//===================================================================================================
+//===================================================================================================
+//===================================================================================================
+//===================================================================================================
+//===================================================================================================
+//===================================================================================================
+
+
